@@ -26,11 +26,11 @@ import java.util.regex.Pattern;
 //滑记模板
 public class Main5 {
 
-    private static String index = "10";
+    private static String index = "506";
     private static String chuchu = "2025徐涛《优题库》";
 
     public static void main(String[] args) {
-        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/xunke/xutao/1/"+index+".txt");
+        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/xunke/xutao/5/"+index+".txt");
         //System.out.println("-----"+getJson(file));
         String jsonStr = getJson(file);
         //JSONObject json = JSONObject.parseObject(jsonStr);
@@ -93,7 +93,7 @@ public class Main5 {
             String issingle = timu.getType();
             data.setTixing( "1".equals(issingle)  ?"单选题":"多选题");
             //题干
-            data.setTigan("");
+            //data.setTigan("");
             //题目
             String title = timu.getStem();
             title = (i + 1) + "." + title;
@@ -104,12 +104,16 @@ public class Main5 {
 
             StringBuilder xuanxiang = new StringBuilder();
             List<String> options = timu.getOptions();
+            List<String> optionlist = new ArrayList<>();
             for (String option : options) {
                 option = removeHtmlTags(option);
-                xuanxiang.append(option).append("|");
+                //xuanxiang.append(option).append("|");
+                optionlist.add(option);
             }
-            String s1 = xuanxiang.toString();
-            data.setXuanxiang(s1);
+            String join = String.join("|", optionlist);
+            data.setXuanxiang(join);
+            //String s1 = xuanxiang.toString();
+            //data.setXuanxiang(s1);
             //答案
             List<String> answers = timu.getAnswer();
             String s2 = convertToString(answers);
@@ -119,7 +123,7 @@ public class Main5 {
 
             jiexi = StringEscapeUtils.unescapeHtml4(jiexi);
             System.out.println("-----" + jiexi);
-            jiexi = filterTagsNewJiexi(jiexi);
+            //jiexi = filterTagsNewJiexi(jiexi);
             System.out.println("-----" + jiexi);
             WriteCellData<String> cellData3 = new WriteCellData<>();
             cellData3.setType(CellDataTypeEnum.RICH_TEXT_STRING);

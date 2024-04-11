@@ -15,8 +15,8 @@ public class DemoData5 {
     private String chuchu; //无
     @ExcelProperty("题型")
     private String tixing; //单选题/多选题
-    @ExcelProperty("题干")
-    private String tigan;  //无
+//    @ExcelProperty("题干")
+//    private String tigan;  //无
     @ExcelProperty("题目")
     private String timu;
     @ExcelProperty("选项")
@@ -52,13 +52,13 @@ public class DemoData5 {
         this.tixing = tixing;
     }
 
-    public String getTigan() {
-        return tigan;
-    }
-
-    public void setTigan(String tigan) {
-        this.tigan = tigan;
-    }
+//    public String getTigan() {
+//        return tigan;
+//    }
+//
+//    public void setTigan(String tigan) {
+//        this.tigan = tigan;
+//    }
 
     public String getXuanxiang() {
         return xuanxiang;

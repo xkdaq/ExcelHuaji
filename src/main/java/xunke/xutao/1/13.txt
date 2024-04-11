@@ -2125,7 +2125,7 @@
 			"stem": "<p>&quot;人类从必然王国进入自由王国&quot;是指人们</p>",
 			"answer": [0, 2],
 			"analysis": "<p><span style=\"color: #FF0000;\"><strong>★</strong></span><strong>解题思路</strong></p><p><span style=\"color: #E36C09;\"><strong>&nbsp; &nbsp; &nbsp;本题考查对自由王国的理解</strong></span>。<span style=\"color: #00B0F0;\"><u>&quot;从必然王国走向自由王国&quot;是马克思对未来社会人的发展状态的预测。这里所说的&quot;自由&quot;指的是摆脱了自然的奴役和社会的压迫，摆脱了盲目必然性的奴役。但应注意的是摆脱奴役并不意味着摆脱&quot;制约&quot;,这两个词语的含义是不同的。无论什么时候，人类都不可能是&quot;绝对自由&quot;的，因为自由是以必然为前提和限度的</u></span>。因此，选项A、C正确。</p><p><strong><br/></strong></p><p><span style=\"color: #FF0000;\"><strong>※</strong></span><strong>干扰选项</strong></p><p>&nbsp; &nbsp; &nbsp;选项B,无论什么样的社会形态，自然规律和社会规律的制约和支配都是存在的，只不过在自由王国，人们可以更好地认识和利用自然规律和社会规律，但仍然受其支配。故不选。</p><p>&nbsp; &nbsp; &nbsp;选项D,无论什么时候，人类都不可能是&quot;绝对自由&quot;的，因为自由是以必然为前提和限度的。故不选。</p>",
-			"options": ["<p>摆脱了自然的奴役和社会的压迫</p>\n", "<p>摆脱了盲目必然性的奴役</p>\n", "<p>摆脱了自然和社会规律的支配</p>", "<p>获得了绝对完全的自由</p>\n"],
+			"options": ["<p>摆脱了自然的奴役和社会的压迫</p>\n", "<p>摆脱了自然和社会规律的支配</p>", "<p>摆脱了盲目必然性的奴役</p>\n", "<p>获得了绝对完全的自由</p>\n"],
 			"difficulty": 2,
 			"parentId": 0,
 			"subCount": 0,
