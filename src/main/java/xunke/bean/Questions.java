@@ -43,6 +43,16 @@ public class Questions {
     private long isfavorite;
     private long categoryId;
     private String stem;
+    private int types; //1基础 2强化
+
+
+    public int getTypes() {
+        return types;
+    }
+
+    public void setTypes(int types) {
+        this.types = types;
+    }
 
     public long getOldMediaId() {
         return oldMediaId;

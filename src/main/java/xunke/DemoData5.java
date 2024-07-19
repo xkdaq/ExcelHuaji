@@ -23,10 +23,21 @@ public class DemoData5 {
     private String xuanxiang; //帝都|魔都|雾都|妖都|神都
     @ExcelProperty("答案")
     private String daan;  //A AB
-    @ExcelProperty("解析")
-    @ContentStyle(wrapped = true)
-    private WriteCellData<String> jiexi;
+//    @ExcelProperty("解析")
+//    @ContentStyle(wrapped = true)
+//    private WriteCellData<String> jiexi;
 
+    @ExcelProperty("解析")
+    private String jiexi;
+
+
+    public String getJiexi() {
+        return jiexi;
+    }
+
+    public void setJiexi(String jiexi) {
+        this.jiexi = jiexi;
+    }
 
     public String getId() {
         return id;
@@ -84,11 +95,11 @@ public class DemoData5 {
         this.daan = daan;
     }
 
-    public WriteCellData<String> getJiexi() {
-        return jiexi;
-    }
-
-    public void setJiexi(WriteCellData<String> jiexi) {
-        this.jiexi = jiexi;
-    }
+//    public WriteCellData<String> getJiexi() {
+//        return jiexi;
+//    }
+//
+//    public void setJiexi(WriteCellData<String> jiexi) {
+//        this.jiexi = jiexi;
+//    }
 }
