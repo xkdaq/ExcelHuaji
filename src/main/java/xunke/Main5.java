@@ -27,57 +27,60 @@ import java.util.regex.Pattern;
 public class Main5 {
 
     private static String index = "";
-    private static String chuchu = "25考研333应试题库";
+    private static String chuchu = "25冬青333甄选题库";
 
     private static int types = 7; //表示前面7个是基础 其余的是强化
 
     public static void main(String[] args) {
-        start("0" + 1);
+//        start("0" + 1);
 
         //遍历文件夹
-//        for (int i = 1 ; i < 10;i++){
-//            switch (i){
-//                case 1:
-//                    types = 22;
+        for (int i = 1 ; i < 10;i++){
+            switch (i){
+                case 1:
+                    types = 20;
+                    break;
+                case 2:
+                    types = 18;
+                    break;
+                case 3:
+                    types = 22;
+                    break;
+                case 4:
+                    types = 19;
+                    break;
+                case 5:
+                    types = 24;
+                    break;
+                case 6:
+                    types = 36;
+                    break;
+                case 7:
+                    types = 38;
+                    break;
+                case 8:
+                    types = 24;
+                    break;
+                case 9:
+                    types = 23;
+                    break;
+//                case 10:
+//                    types = 13;
 //                    break;
-//                case 2:
-//                    types = 15;
-//                    break;
-//                case 3:
-//                    types = 17;
-//                    break;
-//                case 4:
-//                    types = 18;
-//                    break;
-//                case 5:
-//                    types = 21;
-//                    break;
-//                case 6:
-//                    types = 30;
-//                    break;
-//                case 7:
-//                    types = 34;
-//                    break;
-//                case 8:
-//                    types = 18;
-//                    break;
-//                case 9:
-//                    types = 20;
-//                    break;
-//            }
-//
-//            if (i<10) {
-//                start("0" + i);
-//            }else{
-//                start(""+i);
-//            }
-//        }
+            }
+
+            if (i<10) {
+                start("0" + i);
+            }else{
+                start(""+i);
+            }
+        }
 
     }
 
     public static void start(String ins){
         index = ins;
-        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/xunke/jiaoyuxue/yingshi/4/"+index+".txt");
+        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/xunke/jiaoyuxue/dongqing/4/"+index+".txt");
         //System.out.println("-----"+getJson(file));
         String jsonStr = getJson(file);
         //JSONObject json = JSONObject.parseObject(jsonStr);
