@@ -1,0 +1,97 @@
+{
+	"count": 1,
+	"totalPages": 1,
+	"pageSize": 1,
+	"currentPage": 1,
+	"data": {
+		"questions": [{
+			"id": 69394,
+			"type": "7",
+			"stem": "<p><img src=\"https://static72.cdn.ixunke.com/images/2024-07-21/1721540130nxYo.png\" title=\"images/2024-07-21/1721540130nxYo.png\" alt=\"\"/></p>",
+			"answer": [
+				[""]
+			],
+			"analysis": "",
+			"options": [],
+			"difficulty": 1,
+			"parentId": 0,
+			"subCount": 0,
+			"nature": 3,
+			"score": 1,
+			"kind": "说明",
+			"source": "",
+			"categoryId": 0,
+			"containCount": 0,
+			"noteCounts": 0,
+			"studCount": 0,
+			"rightCount": 0,
+			"meanScoreRate": 0,
+			"qBankId": 147,
+			"chapterId": 9128,
+			"mediaId": 0,
+			"oldMediaId": 0,
+			"mediaTable": "old",
+			"stemMediaId": 0,
+			"baseId": 0,
+			"kindId": 0,
+			"seq": 0,
+			"postNum": 0,
+			"pType": 6,
+			"isHaveAnalysisText": 1,
+			"isExistTextAnalysis": 0,
+			"isHaveAnalysisVideo": 1,
+			"isExistVideoAnalysis": 0,
+			"isDid": -1,
+			"isfavorite": -1,
+			"stemMedia": {
+				"mediaType": "",
+				"mediaUri": "",
+				"mediaTime": "",
+				"videoPictureUri": "",
+				"definition": {},
+				"formatStream": []
+			},
+			"analysisVideoThumb": "",
+			"qNo": null
+		}],
+		"title": "全面依法治国",
+		"lastQNo": 0,
+		"lastQId": 0,
+		"optional": {
+			"singleQShowType": 2,
+			"qEncrypt": {
+				"switch": 0,
+				"key": ""
+			},
+			"watermark": {
+				"switch": 0,
+				"contentSource": [1],
+				"content": ["", "", ""],
+				"selectedContent": ["avatar", "nickname", "siteTitle"],
+				"fontSize": 17,
+				"fontColor": "#333333",
+				"fontRotate": -12,
+				"fontOpacity": 9,
+				"position": "lm"
+			},
+			"fistChapterOpen": 1,
+			"qbankHomeStatType": 2,
+			"wrongQAutoRemove": {
+				"switch": 0,
+				"consecRightCount": 1
+			},
+			"exportStudentBool": 1,
+			"chapterCateHorizontal": true,
+			"noteAlias": "研友说",
+			"imgNoEvents": 0,
+			"deflate": 0,
+			"questionComment": 1,
+			"serverTime": 1722076898569,
+			"ad": {},
+			"wltest": 2,
+			"showStructure": 0
+		}
+	},
+	"errno": 0,
+	"errmsg": ""
+}
