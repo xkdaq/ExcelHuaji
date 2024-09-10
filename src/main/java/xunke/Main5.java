@@ -27,17 +27,17 @@ import java.util.regex.Pattern;
 public class Main5 {
 
     private static String index = "";
-    private static String chuchu = "25米鹏1000题";
+    private static String chuchu = "25凯程333仿真3套卷";
 
     private static boolean isTypes = false; //开关 控制是否自动分基础和强化，开关打开时，按照下面types的个数排序
     private static int types = 7; //表示前面7个是基础 其余的是强化
 
     public static void main(String[] args) {
 //        //获取单独文件
-//        start("0" + 1);
+//        start("0" + 0);
 
         //遍历文件夹
-        for (int i = 1 ; i < 6;i++){
+        for (int i = 0 ; i < 4;i++){
             if (isTypes) {
                 switch (i) {
                     case 1:
@@ -83,7 +83,7 @@ public class Main5 {
 
     public static void start(String ins){
         index = ins;
-        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/xunke/zhengzhi/mi/5/"+index+".txt");
+        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/xunke/jiaoyuxue/moniti/"+index+".txt");
         //System.out.println("-----"+getJson(file));
         String jsonStr = getJson(file);
         //JSONObject json = JSONObject.parseObject(jsonStr);
@@ -151,44 +151,58 @@ public class Main5 {
             //只筛选单选题和多选题
             if ("1".equals(type)||"2".equals(type)) {
                 DemoData5 data = new DemoData5();
-                //ID
+                //1.ID
                 String timuid = "" + timu.getId();
                 data.setId(timuid);
-                //出处
-                //String chuchuNew = chuchu + "第"+index+"套";
-                data.setChuchu(chuchu);
-                //题型 多选题
+
+                //2.出处
+                String chuchuNew = "";
+                if("00".equals(index)){
+                    chuchuNew = "333教育综合大纲样卷";
+                }else{
+                    chuchuNew = chuchu + "第"+index+"套";
+                }
+                data.setChuchu(chuchuNew);
+                //data.setChuchu(chuchu);
+
+
+                //3.题型 单选题、多选题
                 String issingle = timu.getType();
                 data.setTixing("1".equals(issingle) ? "单选题" : "多选题");
-                //题干
-                //data.setTigan("");
-                //题目
-                String title = timu.getStem();
-                title = (i + 1) + "." + title;
-                data.setTimu(chuli(title));
-                //选项
-                //String xuanText = timu.getChoiceA() + "|" + timu.getChoiceB()+ "|" + timu.getChoiceC()+"|" + timu.getChoiceD();
-                //xuanText = chulihuiche(xuanText);
 
-                StringBuilder xuanxiang = new StringBuilder();
+                //4.题干
+                //data.setTigan("");
+
+                //5.题目
+                String title = timu.getStem();
+                //添加序号
+                title = (i + 1) + "." + title;
+                //去除转义
+                title = StringEscapeUtils.unescapeHtml4(title);
+                //去除所有标签 包括换行
+                title = removeHtmlTags(title);
+                data.setTimu(chuli(title));
+
+                //6.选项
                 List<String> options = timu.getOptions();
                 List<String> optionlist = new ArrayList<>();
                 for (String option : options) {
+                    //去除专义符号
+                    option = StringEscapeUtils.unescapeHtml4(option);
+                    //去除所有标签 包括换行
                     option = removeHtmlTags(option);
-                    //xuanxiang.append(option).append("|");
                     optionlist.add(option);
                 }
                 String join = String.join("|", optionlist);
                 data.setXuanxiang(join);
-                //String s1 = xuanxiang.toString();
-                //data.setXuanxiang(s1);
-                //答案
+
+                //7.答案
                 List<String> answers = timu.getAnswer();
                 String s2 = convertToString(answers);
                 data.setDaan(s2);
-                //解析
-                String jiexi = timu.getAnalysis();
 
+                //8.解析
+                String jiexi = timu.getAnalysis();
 
                 jiexi = jiexi.replaceAll("☺", "");
                 jiexi = jiexi.replaceAll("精研", "猴哥");
@@ -196,9 +210,12 @@ public class Main5 {
                 jiexi = jiexi.replaceAll("4BACC6", "00B0F0");
                 jiexi = jiexi.replaceAll("E36C09", "E36C09");
                 jiexi = jiexi.replaceAll("00B0F0", "00B0F0");
+
+                //去除转义符号
                 jiexi = StringEscapeUtils.unescapeHtml4(jiexi);
                 System.out.println("-----" + jiexi);
-                //jiexi = filterTagsNewJiexi(jiexi);
+                //去除标签
+                jiexi = filterTagsNewJiexi(jiexi);
                 //System.out.println("-----" + jiexi);
                 //jiexi = jiexi + "【公众号：猴子不吃柠檬】";
 //            WriteCellData<String> cellData3 = new WriteCellData<>();
@@ -298,10 +315,12 @@ public class Main5 {
     }
 
     public static String removeHtmlTags(String html) {
-        // 定义HTML标签的正则表达式
+        //定义HTML标签的正则表达式
         String regex = "<[^>]+>";
-        // 使用正则表达式替换HTML标签
+        //使用正则表达式替换HTML标签
         String plainText = html.replaceAll(regex, "");
+        //去掉换行
+        plainText = plainText.replaceAll("\n", "");
         return plainText;
     }
 
