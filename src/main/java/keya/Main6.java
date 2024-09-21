@@ -35,13 +35,8 @@ public class Main6 {
 
     private static int muluIndex = 0; //表示一级目录的索引
     private static String[] mulu1 = {
-            "xxxxx",
-            "01.第一章 领悟人生真谛 把握人生方向(含绪论)",
-            "02.第二章 追求远大理想 坚定崇高信念",
-            "03.第三章 继承优良传统 弘扬中国精神",
-            "04.第四章 明确价值要求 践行价值准则",
-            "05.第五章 遵守道德规范 锤炼道德品格",
-            "06.第六章 学习法治思想 提升法治素养"
+            "0xxxx",
+            "01.形势与政策以及当代世界经济与政治",
     };
 
 
@@ -50,7 +45,7 @@ public class Main6 {
 //        start("0" + 1);
 
         //遍历文件夹
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i < 2; i++) {
             muluIndex = i;
             if (i < 10) {
                 start("0" + i);
@@ -63,7 +58,7 @@ public class Main6 {
 
     public static void start(String ins) {
         index = ins;
-        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/xunke/zhengzhi/mi/5/" + index + ".txt");
+        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/keya/zhengzhi/yu/6/" + index + ".txt");
         //System.out.println("-----"+getJson(file));
         String jsonStr = getJson(file);
         //JSONObject json = JSONObject.parseObject(jsonStr);
@@ -117,10 +112,11 @@ public class Main6 {
         return "";
     }
 
+    private static List<DemoData6> list = new ArrayList<>();  //all
 
     private static void wirte(List<Questions> timus) {
 
-        List<DemoData6> list = new ArrayList<>();  //all
+
         List<DemoData6> list1 = new ArrayList<>();  //单选题
         List<DemoData6> list2 = new ArrayList<>();  //多选题
 
@@ -198,7 +194,7 @@ public class Main6 {
                 //一级目录
                 data.setMulu1(mulu1[muluIndex]);
                 //二级目录
-                data.setMulu2("1".equals(issingle)?"单选题":"多选题");
+                //data.setMulu2("1".equals(issingle)?"单选题":"多选题");
 
 
                 if (isTypes) {
@@ -222,7 +218,8 @@ public class Main6 {
         }
 
         if (!list.isEmpty()) {
-            String fileName0 = index + ".all" + System.currentTimeMillis() + ".xlsx";
+            //String fileName0 = index + ".all" + System.currentTimeMillis() + ".xlsx";
+            String fileName0 = "555555.xlsx";
             EasyExcel.write(fileName0, DemoData6.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(list);
         }
 
