@@ -27,42 +27,45 @@ import java.util.regex.Pattern;
 public class Main6 {
 
     private static String index = "";
-    private static String chuchu = "25凯程333仿真3套卷";
+    private static String chuchu = "25丹丹311章节1000题";
 
     private static boolean isTypes = false; //开关 控制是否自动分基础和强化，开关打开时，按照下面types的个数排序
     private static int types = 7; //表示前面7个是基础 其余的是强化
 
 
-    private static int muluIndex = 0; //表示一级目录的索引
+    private static int muluIndex = 2; //表示一级目录的索引
     private static String[] mulu1 = {
             "0xxxx",
-            "01.形势与政策以及当代世界经济与政治",
+            "01.25肖秀荣背诵手册190题",
+            "02.25腿姐新大纲10题",
+            "03.25苏一第二十几届三中全会",
     };
 
 
     public static void main(String[] args) {
 //        //获取单独文件
-//        start("0" + 1);
+        start("0" + 2);
 
         //遍历文件夹
-        for (int i = 1; i < 2; i++) {
-            muluIndex = i;
-            if (i < 10) {
-                start("0" + i);
-            } else {
-                start("" + i);
-            }
-        }
+//        for (int i = 1; i < 9; i++) {
+//            muluIndex = i;
+//            if (i < 10) {
+//                start("0" + i);
+//            } else {
+//                start("" + i);
+//            }
+//        }
 
     }
 
     public static void start(String ins) {
         index = ins;
-        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/keya/zhengzhi/yu/6/" + index + ".txt");
+        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/keya/zhengzhi/chongci/xindagang/" + index + ".txt");
         //System.out.println("-----"+getJson(file));
         String jsonStr = getJson(file);
         //JSONObject json = JSONObject.parseObject(jsonStr);
         //System.out.println(JSONObject.toJSONString(json, true));
+        if(jsonStr.isEmpty()) return;
         Beans6 mBeans = JSON.parseObject(jsonStr, Beans6.class);
         Datass data = mBeans.getData();
         List<Questions> timu = data.getQuestions();
@@ -188,13 +191,13 @@ public class Main6 {
                 //只去除 span标签
                 jiexi = filterJiexi(jiexi);
                 //System.out.println("-----" + jiexi);
-                jiexi = jiexi + "【公众号：可吖】";
+                //jiexi = jiexi + "【公众号：可吖】";
                 data.setJiexi(jiexi);
 
                 //一级目录
                 data.setMulu1(mulu1[muluIndex]);
                 //二级目录
-                //data.setMulu2("1".equals(issingle)?"单选题":"多选题");
+                data.setMulu2("1".equals(issingle)?"单选题":"多选题");
 
 
                 if (isTypes) {
@@ -217,21 +220,21 @@ public class Main6 {
             }
         }
 
-        if (!list.isEmpty()) {
-            //String fileName0 = index + ".all" + System.currentTimeMillis() + ".xlsx";
-            String fileName0 = "555555.xlsx";
-            EasyExcel.write(fileName0, DemoData6.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(list);
+//        if (!list.isEmpty()) {
+//            //String fileName0 = index + ".all" + System.currentTimeMillis() + ".xlsx";
+//            String fileName0 = "4444444.xlsx";
+//            EasyExcel.write(fileName0, DemoData6.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(list);
+//        }
+
+        if (!list1.isEmpty()) {
+            String fileName1 = index + ".dan" + System.currentTimeMillis() + ".xlsx";
+            EasyExcel.write(fileName1, DemoData6.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(list1);
         }
 
-//        if (!list1.isEmpty()) {
-//            String fileName1 = index + ".dan" + System.currentTimeMillis() + ".xlsx";
-//            EasyExcel.write(fileName1, DemoData6.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(list1);
-//        }
-//
-//        if (!list2.isEmpty()) {
-//            String fileName2 = index + ".duo" + System.currentTimeMillis() + ".xlsx";
-//            EasyExcel.write(fileName2, DemoData6.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(list2);
-//        }
+        if (!list2.isEmpty()) {
+            String fileName2 = index + ".duo" + System.currentTimeMillis() + ".xlsx";
+            EasyExcel.write(fileName2, DemoData6.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(list2);
+        }
     }
 
     public static String convertToString(List<String> dataList) {

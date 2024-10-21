@@ -27,63 +27,63 @@ import java.util.regex.Pattern;
 public class Main5 {
 
     private static String index = "";
-    private static String chuchu = "25凯程333仿真3套卷";
+    private static String chuchu = "25肖秀荣《背诵手册》190题";
 
     private static boolean isTypes = false; //开关 控制是否自动分基础和强化，开关打开时，按照下面types的个数排序
     private static int types = 7; //表示前面7个是基础 其余的是强化
 
     public static void main(String[] args) {
 //        //获取单独文件
-//        start("0" + 0);
+        start("0" + 1);
 
         //遍历文件夹
-        for (int i = 0 ; i < 4;i++){
-            if (isTypes) {
-                switch (i) {
-                    case 1:
-                        types = 20;
-                        break;
-                    case 2:
-                        types = 18;
-                        break;
-                    case 3:
-                        types = 22;
-                        break;
-                    case 4:
-                        types = 19;
-                        break;
-                    case 5:
-                        types = 24;
-                        break;
-                    case 6:
-                        types = 36;
-                        break;
-                    case 7:
-                        types = 38;
-                        break;
-                    case 8:
-                        types = 24;
-                        break;
-                    case 9:
-                        types = 23;
-                        break;
-                    case 10:
-                        types = 13;
-                        break;
-                }
-            }
-            if (i<10) {
-                start("0" + i);
-            }else{
-                start(""+i);
-            }
-        }
+//        for (int i = 0 ; i < 4;i++){
+//            if (isTypes) {
+//                switch (i) {
+//                    case 1:
+//                        types = 20;
+//                        break;
+//                    case 2:
+//                        types = 18;
+//                        break;
+//                    case 3:
+//                        types = 22;
+//                        break;
+//                    case 4:
+//                        types = 19;
+//                        break;
+//                    case 5:
+//                        types = 24;
+//                        break;
+//                    case 6:
+//                        types = 36;
+//                        break;
+//                    case 7:
+//                        types = 38;
+//                        break;
+//                    case 8:
+//                        types = 24;
+//                        break;
+//                    case 9:
+//                        types = 23;
+//                        break;
+//                    case 10:
+//                        types = 13;
+//                        break;
+//                }
+//            }
+//            if (i<10) {
+//                start("0" + i);
+//            }else{
+//                start(""+i);
+//            }
+//        }
 
     }
 
     public static void start(String ins){
         index = ins;
-        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/xunke/jiaoyuxue/moniti/"+index+".txt");
+        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/keya/zhengzhi/chongci/xindagang/"+index+".txt");
         //System.out.println("-----"+getJson(file));
         String jsonStr = getJson(file);
         //JSONObject json = JSONObject.parseObject(jsonStr);
@@ -162,8 +162,8 @@ public class Main5 {
                 }else{
                     chuchuNew = chuchu + "第"+index+"套";
                 }
-                data.setChuchu(chuchuNew);
-                //data.setChuchu(chuchu);
+                //data.setChuchu(chuchuNew);
+                data.setChuchu(chuchu);
 
 
                 //3.题型 单选题、多选题
