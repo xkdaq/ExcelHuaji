@@ -1,16 +1,16 @@
-package keya;
+package huaji;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.fastjson.JSON;
-import keya.bean.Beans6;
-import keya.bean.Datass;
-import keya.bean.Questions;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import huaji.bean.Beans;
+import huaji.bean.Datass;
+import huaji.bean.Questions;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,50 +23,72 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//小程序模板
-public class Main6 {
+//滑记模板
+public class Main5 {
 
     private static String index = "";
-    private static String chuchu = "25丹丹311章节1000题";
+    private static String chuchu = "25肖秀荣《背诵手册》190题";
 
     private static boolean isTypes = false; //开关 控制是否自动分基础和强化，开关打开时，按照下面types的个数排序
     private static int types = 7; //表示前面7个是基础 其余的是强化
 
-
-    private static int muluIndex = 2; //表示一级目录的索引
-    private static String[] mulu1 = {
-            "0xxxx",
-            "01.25肖秀荣背诵手册190题",
-            "02.25腿姐新大纲10题",
-            "03.25苏一第二十几届三中全会",
-    };
-
-
     public static void main(String[] args) {
 //        //获取单独文件
-        start("0" + 2);
+        start("0" + 1);
 
         //遍历文件夹
-//        for (int i = 1; i < 9; i++) {
-//            muluIndex = i;
-//            if (i < 10) {
+//        for (int i = 0 ; i < 4;i++){
+//            if (isTypes) {
+//                switch (i) {
+//                    case 1:
+//                        types = 20;
+//                        break;
+//                    case 2:
+//                        types = 18;
+//                        break;
+//                    case 3:
+//                        types = 22;
+//                        break;
+//                    case 4:
+//                        types = 19;
+//                        break;
+//                    case 5:
+//                        types = 24;
+//                        break;
+//                    case 6:
+//                        types = 36;
+//                        break;
+//                    case 7:
+//                        types = 38;
+//                        break;
+//                    case 8:
+//                        types = 24;
+//                        break;
+//                    case 9:
+//                        types = 23;
+//                        break;
+//                    case 10:
+//                        types = 13;
+//                        break;
+//                }
+//            }
+//            if (i<10) {
 //                start("0" + i);
-//            } else {
-//                start("" + i);
+//            }else{
+//                start(""+i);
 //            }
 //        }
 
     }
 
-    public static void start(String ins) {
+    public static void start(String ins){
         index = ins;
-        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/keya/zhengzhi/chongci/xindagang/" + index + ".txt");
+        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/keya/zhengzhi/chongci/xindagang/"+index+".txt");
         //System.out.println("-----"+getJson(file));
         String jsonStr = getJson(file);
         //JSONObject json = JSONObject.parseObject(jsonStr);
         //System.out.println(JSONObject.toJSONString(json, true));
-        if(jsonStr.isEmpty()) return;
-        Beans6 mBeans = JSON.parseObject(jsonStr, Beans6.class);
+        Beans mBeans = JSON.parseObject(jsonStr, Beans.class);
         Datass data = mBeans.getData();
         List<Questions> timu = data.getQuestions();
 
@@ -115,26 +137,43 @@ public class Main6 {
         return "";
     }
 
-    private static List<DemoData6> list = new ArrayList<>();  //all
 
     private static void wirte(List<Questions> timus) {
 
-
-        List<DemoData6> list1 = new ArrayList<>();  //单选题
-        List<DemoData6> list2 = new ArrayList<>();  //多选题
+        List<DemoData5> list = new ArrayList<>();  //all
+        List<DemoData5> list1 = new ArrayList<>();  //单选题
+        List<DemoData5> list2 = new ArrayList<>();  //多选题
 
         for (int i = 0; i < timus.size(); i++) {
             Questions timu = timus.get(i);
 
             String type = timu.getType();
             //只筛选单选题和多选题
-            if ("1".equals(type) || "2".equals(type)) {
-                DemoData6 data = new DemoData6();
+            if ("1".equals(type)||"2".equals(type)) {
+                DemoData5 data = new DemoData5();
                 //1.ID
                 String timuid = "" + timu.getId();
                 data.setId(timuid);
 
-                //2.题目
+                //2.出处
+                String chuchuNew = "";
+                if("00".equals(index)){
+                    chuchuNew = "333教育综合大纲样卷";
+                }else{
+                    chuchuNew = chuchu + "第"+index+"套";
+                }
+                //data.setChuchu(chuchuNew);
+                data.setChuchu(chuchu);
+
+
+                //3.题型 单选题、多选题
+                String issingle = timu.getType();
+                data.setTixing("1".equals(issingle) ? "单选题" : "多选题");
+
+                //4.题干
+                //data.setTigan("");
+
+                //5.题目
                 String title = timu.getStem();
                 //添加序号
                 title = (i + 1) + "." + title;
@@ -143,16 +182,6 @@ public class Main6 {
                 //去除所有标签 包括换行
                 title = removeHtmlTags(title);
                 data.setTimu(chuli(title));
-
-                //3.题型 单选题、多选题
-                String issingle = timu.getType();
-                data.setTixing("1".equals(issingle) ? "单选题" : "多选题");
-
-                //4.分数
-                data.setFenshu("1".equals(issingle) ? "1" : "2");
-
-                //5.难度
-                data.setNandu("简单");
 
                 //6.选项
                 List<String> options = timu.getOptions();
@@ -164,10 +193,8 @@ public class Main6 {
                     option = removeHtmlTags(option);
                     optionlist.add(option);
                 }
-                data.setXuanxiangA(optionlist.get(0));
-                data.setXuanxiangB(optionlist.get(1));
-                data.setXuanxiangC(optionlist.get(2));
-                data.setXuanxiangD(optionlist.get(3));
+                String join = String.join("|", optionlist);
+                data.setXuanxiang(join);
 
                 //7.答案
                 List<String> answers = timu.getAnswer();
@@ -178,7 +205,8 @@ public class Main6 {
                 String jiexi = timu.getAnalysis();
 
                 jiexi = jiexi.replaceAll("☺", "");
-                jiexi = jiexi.replaceAll("精研", "可吖");
+                jiexi = jiexi.replaceAll("精研", "猴哥");
+                jiexi = jiexi.replaceAll("精讲出处", "精讲出处：");
                 jiexi = jiexi.replaceAll("4BACC6", "00B0F0");
                 jiexi = jiexi.replaceAll("E36C09", "E36C09");
                 jiexi = jiexi.replaceAll("00B0F0", "00B0F0");
@@ -186,19 +214,17 @@ public class Main6 {
                 //去除转义符号
                 jiexi = StringEscapeUtils.unescapeHtml4(jiexi);
                 System.out.println("-----" + jiexi);
-                //去除所以标签
-                //jiexi = filterTagsNewJiexi(jiexi);
-                //只去除 span标签
-                jiexi = filterJiexi(jiexi);
+                //去除标签
+                jiexi = filterTagsNewJiexi(jiexi);
                 //System.out.println("-----" + jiexi);
-                //jiexi = jiexi + "【公众号：可吖】";
+                //jiexi = jiexi + "【公众号：猴子不吃柠檬】";
+//            WriteCellData<String> cellData3 = new WriteCellData<>();
+//            cellData3.setType(CellDataTypeEnum.RICH_TEXT_STRING);
+//            RichTextStringData richTextStringData3 = new RichTextStringData();
+//            richTextStringData3.setTextString(jiexi);
+//            cellData3.setRichTextStringDataValue(richTextStringData3);
+//            data.setJiexi(cellData3);
                 data.setJiexi(jiexi);
-
-                //一级目录
-                data.setMulu1(mulu1[muluIndex]);
-                //二级目录
-                data.setMulu2("1".equals(issingle)?"单选题":"多选题");
-
 
                 if (isTypes) {
                     //1基础 2强化
@@ -220,20 +246,33 @@ public class Main6 {
             }
         }
 
-//        if (!list.isEmpty()) {
-//            //String fileName0 = index + ".all" + System.currentTimeMillis() + ".xlsx";
-//            String fileName0 = "4444444.xlsx";
-//            EasyExcel.write(fileName0, DemoData6.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(list);
+        //第一版是转成excel的标准格式xlsx 然后手动转成csv
+//        String fileName0 = index + ".all"+System.currentTimeMillis() + ".xlsx";
+//        EasyExcel.write(fileName0, DemoData5.class).sheet("模板").doWrite(list);
+
+//        if (!list1.isEmpty()) {
+//            String fileName1 = index + ".dan" + System.currentTimeMillis() + ".xlsx";
+//            EasyExcel.write(fileName1, DemoData5.class).sheet("模板").doWrite(list1);
+//        }
+//
+//        if (!list2.isEmpty()) {
+//            String fileName2 = index + ".duo" + System.currentTimeMillis() + ".xlsx";
+//            EasyExcel.write(fileName2, DemoData5.class).sheet("模板").doWrite(list2);
 //        }
 
+        //第二版更新直接转成csv 注意点：修改了解析的类型从WriteCellData改为了String 测试通过
+        //String fileName0 = index + ".all"+System.currentTimeMillis() + ".csv";
+        //EasyExcel.write(fileName0, DemoData5.class).excelType(ExcelTypeEnum.CSV).sheet("模板").doWrite(list);
+
+
         if (!list1.isEmpty()) {
-            String fileName1 = index + ".dan" + System.currentTimeMillis() + ".xlsx";
-            EasyExcel.write(fileName1, DemoData6.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(list1);
+            String fileName1 = index + ".dan" + System.currentTimeMillis() + ".csv";
+            EasyExcel.write(fileName1, DemoData5.class).excelType(ExcelTypeEnum.CSV).sheet("模板").doWrite(list1);
         }
 
         if (!list2.isEmpty()) {
-            String fileName2 = index + ".duo" + System.currentTimeMillis() + ".xlsx";
-            EasyExcel.write(fileName2, DemoData6.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(list2);
+            String fileName2 = index + ".duo" + System.currentTimeMillis() + ".csv";
+            EasyExcel.write(fileName2, DemoData5.class).excelType(ExcelTypeEnum.CSV).sheet("模板").doWrite(list2);
         }
     }
 
@@ -272,16 +311,6 @@ public class Main6 {
         String result = matcher.replaceAll("");
         //去掉换行
         result = result.replaceAll("\n", "");
-        return result;
-    }
-
-    private static String filterJiexi(String input) {
-        //匹配<p>和<span>标签的正则表达式
-        String regex = "<span[^>]*>|<\\/span>";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-        //用空字符串替换匹配到的标签
-        String result = matcher.replaceAll("");
         return result;
     }
 
@@ -339,7 +368,7 @@ public class Main6 {
     }
 
 
-    private static String chuli(String str) {
+    private static String chuli(String str){
         String jiexi = str;
         jiexi = jiexi.replaceAll(" ", "");
         jiexi = jiexi.replaceAll("<p>", "");
@@ -351,7 +380,7 @@ public class Main6 {
         return jiexi;
     }
 
-    private static String chulihuiche(String str) {
+    private static String chulihuiche(String str){
         String jiexi = str;
         jiexi = jiexi.replaceAll("\n", "");
         return jiexi;
