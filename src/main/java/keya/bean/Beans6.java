@@ -6,9 +6,9 @@ package keya.bean;
 
 public class Beans6 {
 
-    private Datass data;
+    private Datass6 data;
 
-    public Datass getData() { return data; }
+    public Datass6 getData() { return data; }
 
-    public void setData(Datass value) { this.data = value; }
+    public void setData(Datass6 value) { this.data = value; }
 }
