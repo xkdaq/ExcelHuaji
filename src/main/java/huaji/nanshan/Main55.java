@@ -26,12 +26,29 @@ public class Main55 {
     private static String index = "";
     private static String chuchu = "25腿姐《8套卷》";
 
+    private static int muluIndex = 1; //表示一级目录的索引
+
+    private static String[] mulu1 = {
+            "0xxxxxxx",
+            "01.模拟卷1：会议题",
+            "02.模拟卷2：思想解放题",
+            "03.模拟卷3：人物题",
+            "04.模拟卷4：文献著作题",
+            "05.模拟卷5：新大纲及时政题",
+            "06.模拟卷6：周年纪念题",
+            "07.模拟卷7：keywords专项题",
+            "08.模拟卷8：土地政策题",
+            "09.模拟卷9：全真模拟"
+    };
+
     public static void main(String[] args) {
         //获取单独文件
         //start("0" + 1);
+        //muluIndex = i;
 
         //遍历文件夹
-        for (int i = 1 ; i < 10;i++){
+        for (int i = 1 ; i < 3;i++){
+            muluIndex = i;
             if (i<10) {
                 start("0" + i);
             }else{
@@ -84,10 +101,11 @@ public class Main55 {
         return "";
     }
 
+    private static List<DemoData55> list = new ArrayList<>();  //all
 
     private static void wirte(List<Datum> timus) {
 
-        List<DemoData55> list = new ArrayList<>();  //all
+
         List<DemoData55> list1 = new ArrayList<>();  //单选题
         List<DemoData55> list2 = new ArrayList<>();  //多选题
 
@@ -171,6 +189,11 @@ public class Main55 {
                 //jiexi = jiexi + "【公众号：猴子不吃柠檬】";
                 data.setJiexi(jiexi);
 
+                //一级目录
+                data.setMulu1(mulu1[muluIndex]);
+                //二级目录
+                data.setMulu2(!isMSelect ?"单选题":"多选题");
+
                 //默认按照 1单选 2多选
                 if (!isMSelect) {
                     list1.add(data);
@@ -181,9 +204,11 @@ public class Main55 {
             }
         }
 
-        //第一版是转成excel的标准格式xlsx 然后手动转成csv
-//        String fileName0 = index + ".all"+System.currentTimeMillis() + ".xlsx";
-//        EasyExcel.write(fileName0, DemoData5.class).sheet("模板").doWrite(list);
+//        if (!list.isEmpty()) {
+//            //第一版是转成excel的标准格式xlsx 然后手动转成csv
+//            String fileName0 = "1111.all.xlsx";
+//            EasyExcel.write(fileName0, DemoData55.class).sheet("模板").doWrite(list);
+//        }
 
 //        if (!list1.isEmpty()) {
 //            String fileName1 = index + ".dan" + System.currentTimeMillis() + ".xlsx";
@@ -196,8 +221,8 @@ public class Main55 {
 //        }
 
         //第二版更新直接转成csv 注意点：修改了解析的类型从WriteCellData改为了String 测试通过
-        //String fileName0 = index + ".all"+System.currentTimeMillis() + ".csv";
-        //EasyExcel.write(fileName0, DemoData5.class).excelType(ExcelTypeEnum.CSV).sheet("模板").doWrite(list);
+//        String fileName0 = index + ".all"+System.currentTimeMillis() + ".csv";
+//        EasyExcel.write(fileName0, DemoData5.class).excelType(ExcelTypeEnum.CSV).sheet("模板").doWrite(list);
 
 
         if (!list1.isEmpty()) {

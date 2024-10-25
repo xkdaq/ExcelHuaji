@@ -21,7 +21,26 @@ public class DemoData55 {
     private String daan;  //A ABC
     @ExcelProperty("解析")
     private String jiexi;
+    @ExcelProperty("一级目录")
+    private String mulu1;
+    @ExcelProperty("二级目录")
+    private String mulu2;
 
+    public String getMulu1() {
+        return mulu1;
+    }
+
+    public void setMulu1(String mulu1) {
+        this.mulu1 = mulu1;
+    }
+
+    public String getMulu2() {
+        return mulu2;
+    }
+
+    public void setMulu2(String mulu2) {
+        this.mulu2 = mulu2;
+    }
 
     public String getJiexi() {
         return jiexi;
