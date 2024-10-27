@@ -15,8 +15,18 @@ public class DemoData55 {
     private String tixing; //单选题/多选题
     @ExcelProperty("题目")
     private String timu;
-    @ExcelProperty("选项")
-    private String xuanxiang; //帝都|魔都|雾都|妖都|神都
+//    @ExcelProperty("选项")
+//    private String xuanxiang; //帝都|魔都|雾都|妖都|神都
+    @ExcelProperty("A")
+    private String xuanxiangA;
+    @ExcelProperty("B")
+    private String xuanxiangB;
+
+    @ExcelProperty("C")
+    private String xuanxiangC;
+
+    @ExcelProperty("D")
+    private String xuanxiangD;
     @ExcelProperty("答案")
     private String daan;  //A ABC
     @ExcelProperty("解析")
@@ -74,12 +84,45 @@ public class DemoData55 {
         this.tixing = tixing;
     }
 
-    public String getXuanxiang() {
-        return xuanxiang;
+//    public String getXuanxiang() {
+//        return xuanxiang;
+//    }
+//
+//    public void setXuanxiang(String xuanxiang) {
+//        this.xuanxiang = xuanxiang;
+//    }
+
+
+    public String getXuanxiangA() {
+        return xuanxiangA;
     }
 
-    public void setXuanxiang(String xuanxiang) {
-        this.xuanxiang = xuanxiang;
+    public void setXuanxiangA(String xuanxiangA) {
+        this.xuanxiangA = xuanxiangA;
+    }
+
+    public String getXuanxiangB() {
+        return xuanxiangB;
+    }
+
+    public void setXuanxiangB(String xuanxiangB) {
+        this.xuanxiangB = xuanxiangB;
+    }
+
+    public String getXuanxiangC() {
+        return xuanxiangC;
+    }
+
+    public void setXuanxiangC(String xuanxiangC) {
+        this.xuanxiangC = xuanxiangC;
+    }
+
+    public String getXuanxiangD() {
+        return xuanxiangD;
+    }
+
+    public void setXuanxiangD(String xuanxiangD) {
+        this.xuanxiangD = xuanxiangD;
     }
 
     public String getTimu() {

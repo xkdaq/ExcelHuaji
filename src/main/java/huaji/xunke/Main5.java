@@ -1,7 +1,6 @@
 package huaji.xunke;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.fastjson.JSON;
 import huaji.xunke.bean.Beans;
 import huaji.xunke.bean.Datass;
@@ -146,10 +145,9 @@ public class Main5 {
         return "";
     }
 
+    private static List<DemoData5> list = new ArrayList<>();  //all
 
     private static void wirte(List<Questions> timus) {
-
-        List<DemoData5> list = new ArrayList<>();  //all
         List<DemoData5> list1 = new ArrayList<>();  //单选题
         List<DemoData5> list2 = new ArrayList<>();  //多选题
 
@@ -202,8 +200,12 @@ public class Main5 {
                     option = removeHtmlTags(option);
                     optionlist.add(option);
                 }
-                String join = String.join("|", optionlist);
-                data.setXuanxiang(join);
+                //String join = String.join("|", optionlist);
+                //data.setXuanxiang(join);
+                data.setXuanxiangA(optionlist.get(0));
+                data.setXuanxiangB(optionlist.get(1));
+                data.setXuanxiangC(optionlist.get(2));
+                data.setXuanxiangD(optionlist.get(3));
 
                 //7.答案
                 List<String> answers = timu.getAnswer();
@@ -227,12 +229,6 @@ public class Main5 {
                 jiexi = filterTagsNewJiexi(jiexi);
                 //System.out.println("-----" + jiexi);
                 //jiexi = jiexi + "【公众号：猴子不吃柠檬】";
-//            WriteCellData<String> cellData3 = new WriteCellData<>();
-//            cellData3.setType(CellDataTypeEnum.RICH_TEXT_STRING);
-//            RichTextStringData richTextStringData3 = new RichTextStringData();
-//            richTextStringData3.setTextString(jiexi);
-//            cellData3.setRichTextStringDataValue(richTextStringData3);
-//            data.setJiexi(cellData3);
                 data.setJiexi(jiexi);
 
                 if (isTypes) {
@@ -255,34 +251,12 @@ public class Main5 {
             }
         }
 
-        //第一版是转成excel的标准格式xlsx 然后手动转成csv
-//        String fileName0 = index + ".all"+System.currentTimeMillis() + ".xlsx";
-//        EasyExcel.write(fileName0, DemoData5.class).sheet("模板").doWrite(list);
-
-//        if (!list1.isEmpty()) {
-//            String fileName1 = index + ".dan" + System.currentTimeMillis() + ".xlsx";
-//            EasyExcel.write(fileName1, DemoData5.class).sheet("模板").doWrite(list1);
-//        }
-//
-//        if (!list2.isEmpty()) {
-//            String fileName2 = index + ".duo" + System.currentTimeMillis() + ".xlsx";
-//            EasyExcel.write(fileName2, DemoData5.class).sheet("模板").doWrite(list2);
-//        }
-
-        //第二版更新直接转成csv 注意点：修改了解析的类型从WriteCellData改为了String 测试通过
-        //String fileName0 = index + ".all"+System.currentTimeMillis() + ".csv";
-        //EasyExcel.write(fileName0, DemoData5.class).excelType(ExcelTypeEnum.CSV).sheet("模板").doWrite(list);
-
-
-        if (!list1.isEmpty()) {
-            String fileName1 = index + ".dan" + System.currentTimeMillis() + ".csv";
-            EasyExcel.write(fileName1, DemoData5.class).excelType(ExcelTypeEnum.CSV).sheet("模板").doWrite(list1);
+        //第三版 还是回到excel 使用guru工具导入 主要是方便自动创建目录
+        if(!list.isEmpty()) {
+            String fileName0 = "all.xlsx";
+            EasyExcel.write(fileName0, DemoData5.class).sheet("模板").doWrite(list);
         }
 
-        if (!list2.isEmpty()) {
-            String fileName2 = index + ".duo" + System.currentTimeMillis() + ".csv";
-            EasyExcel.write(fileName2, DemoData5.class).excelType(ExcelTypeEnum.CSV).sheet("模板").doWrite(list2);
-        }
     }
 
     public static String convertToString(List<String> dataList) {

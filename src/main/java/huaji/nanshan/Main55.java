@@ -1,8 +1,8 @@
 package huaji.nanshan;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.support.ExcelTypeEnum;
 import com.google.gson.Gson;
+import contact.HttpClient;
 import huaji.nanshan.bean.Datum;
 import huaji.nanshan.bean.NanBean;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -47,28 +47,36 @@ public class Main55 {
         //muluIndex = i;
 
         //遍历文件夹
-        for (int i = 1 ; i < 3;i++){
-            muluIndex = i;
-            if (i<10) {
-                start("0" + i);
-            }else{
-                start(""+i);
-            }
-        }
+//        for (int i = 1 ; i < 10;i++){
+//            muluIndex = i;
+//            if (i<10) {
+//                start("0" + i);
+//            }else{
+//                start(""+i);
+//            }
+//        }
+
+        startNet();
     }
 
-    public static  void start(String ins){
+    //本地读取json
+    public static void start(String ins) {
         index = ins;
-        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/data-2/tuijie/"+index+".txt");
+        File file = new File("/Users/kexu/xukee/java/ExcelTest/src/main/java/data-2/tuijie/" + index + ".txt");
         String jsonStr = getJson(file);
-        //NanBean mBeans = JSON.parseObject(jsonStr, NanBean.class);
+        excJson(jsonStr);
+    }
 
+    public static void startNet() {
+        String response = HttpClient.get("api/v1/tk/teackerTk/getQueTkByTeaTkid?tertkid=4699");
+        System.out.println("GET Response: " + response);
+        excJson(response);
+    }
+
+    public static void excJson(String jsonStr) {
         Gson gson = new Gson();
         NanBean mBeans = gson.fromJson(jsonStr, NanBean.class);
-
         List<Datum> timu = mBeans.getData();
-
-        //System.out.println("-----" + cangBean.getDetail().getTimu().size());
         wirte(timu);
     }
 
@@ -123,10 +131,10 @@ public class Main55 {
 
                 //2.出处
                 String chuchuNew = "";
-                if("00".equals(index)){
+                if ("00".equals(index)) {
                     chuchuNew = chuchu;
-                }else{
-                    chuchuNew = chuchu + "第"+index+"套";
+                } else {
+                    chuchuNew = chuchu + "第" + index + "套";
                 }
                 data.setChuchu(chuchuNew);
                 //data.setChuchu(chuchu);
@@ -164,8 +172,12 @@ public class Main55 {
                     option = removeHtmlTags(option);
                     optionlist.add(option);
                 }
-                String join = String.join("|", optionlist);
-                data.setXuanxiang(join);
+                //String join = String.join("|", optionlist);
+                //data.setXuanxiang(join);
+                data.setXuanxiangA(optionlist.get(0));
+                data.setXuanxiangB(optionlist.get(1));
+                data.setXuanxiangC(optionlist.get(2));
+                data.setXuanxiangD(optionlist.get(3));
 
                 //7.答案
                 String correct = timu.getCorrect();
@@ -192,7 +204,7 @@ public class Main55 {
                 //一级目录
                 data.setMulu1(mulu1[muluIndex]);
                 //二级目录
-                data.setMulu2(!isMSelect ?"单选题":"多选题");
+                data.setMulu2(!isMSelect ? "单选题" : "多选题");
 
                 //默认按照 1单选 2多选
                 if (!isMSelect) {
@@ -204,35 +216,10 @@ public class Main55 {
             }
         }
 
-//        if (!list.isEmpty()) {
-//            //第一版是转成excel的标准格式xlsx 然后手动转成csv
-//            String fileName0 = "1111.all.xlsx";
-//            EasyExcel.write(fileName0, DemoData55.class).sheet("模板").doWrite(list);
-//        }
-
-//        if (!list1.isEmpty()) {
-//            String fileName1 = index + ".dan" + System.currentTimeMillis() + ".xlsx";
-//            EasyExcel.write(fileName1, DemoData5.class).sheet("模板").doWrite(list1);
-//        }
-//
-//        if (!list2.isEmpty()) {
-//            String fileName2 = index + ".duo" + System.currentTimeMillis() + ".xlsx";
-//            EasyExcel.write(fileName2, DemoData5.class).sheet("模板").doWrite(list2);
-//        }
-
-        //第二版更新直接转成csv 注意点：修改了解析的类型从WriteCellData改为了String 测试通过
-//        String fileName0 = index + ".all"+System.currentTimeMillis() + ".csv";
-//        EasyExcel.write(fileName0, DemoData5.class).excelType(ExcelTypeEnum.CSV).sheet("模板").doWrite(list);
-
-
-        if (!list1.isEmpty()) {
-            String fileName1 = index + ".dan" + System.currentTimeMillis() + ".csv";
-            EasyExcel.write(fileName1, DemoData55.class).excelType(ExcelTypeEnum.CSV).sheet("模板").doWrite(list1);
-        }
-
-        if (!list2.isEmpty()) {
-            String fileName2 = index + ".duo" + System.currentTimeMillis() + ".csv";
-            EasyExcel.write(fileName2, DemoData55.class).excelType(ExcelTypeEnum.CSV).sheet("模板").doWrite(list2);
+        //第三版 还是回到excel 使用guru工具导入 主要是方便自动创建目录
+        if (!list.isEmpty()) {
+            String fileName0 = "1111.all.xlsx";
+            EasyExcel.write(fileName0, DemoData55.class).sheet("模板").doWrite(list);
         }
     }
 
@@ -317,7 +304,7 @@ public class Main55 {
     }
 
 
-    private static String chuli(String str){
+    private static String chuli(String str) {
         String jiexi = str;
         jiexi = jiexi.replaceAll(" ", "");
         jiexi = jiexi.replaceAll("<p>", "");
@@ -329,7 +316,7 @@ public class Main55 {
         return jiexi;
     }
 
-    private static String chulihuiche(String str){
+    private static String chulihuiche(String str) {
         String jiexi = str;
         jiexi = jiexi.replaceAll("\n", "");
         return jiexi;
