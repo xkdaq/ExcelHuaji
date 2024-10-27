@@ -1,11 +1,11 @@
-package keya;
+package keya.xunke;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.fastjson.JSON;
-import keya.bean.Beans6;
-import keya.bean.Datass6;
-import keya.bean.Questions;
+import keya.xunke.bean.Beans6;
+import keya.xunke.bean.Datass6;
+import keya.xunke.bean.Questions;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.BufferedReader;

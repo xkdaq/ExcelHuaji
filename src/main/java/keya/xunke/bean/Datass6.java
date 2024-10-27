@@ -1,4 +1,4 @@
-package keya.bean;
+package keya.xunke.bean;
 
 import java.util.List;
 

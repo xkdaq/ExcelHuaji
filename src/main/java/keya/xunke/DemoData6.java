@@ -1,4 +1,4 @@
-package keya;
+package keya.xunke;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.EqualsAndHashCode;
